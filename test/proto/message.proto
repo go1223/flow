@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package proto;
+option go_package="./;proto";
+
+// The service definition.
+service SingleFlow{
+    // 推送服务器消息
+    rpc PutMessage (UpperRequest) returns (UpperReply) {}
+    // 获取服务器消息
+    rpc GetMessage (UpperRequest) returns (stream UpperReply){}
+}
+
+// The request message
+message UpperRequest {
+    bytes ID        = 1;    //request ID
+    string reqType  = 2;    //请求类型
+    bytes  reqContent   = 3; //请求内容
+}
+
+// The response message
+message UpperReply {
+    bytes reaType   = 1;    //响应类型
+    bytes contnet   = 2;    //响应内容
+}
